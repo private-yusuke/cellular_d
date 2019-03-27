@@ -1,0 +1,12 @@
+{
+	"authors": [
+		"public_yusuke"
+	],
+	"copyright": "Copyright © 2019, public_yusuke",
+	"dependencies": {
+		"derelict-sdl2": "~>2.1.4"
+	},
+	"description": "A minimal D application.",
+	"license": "MIT",
+	"name": "cellular_d"
+}

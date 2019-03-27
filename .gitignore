@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/cellular_d
+cellular_d.so
+cellular_d.dylib
+cellular_d.dll
+cellular_d.a
+cellular_d.lib
+cellular_d-test-*
+*.exe
+*.o
+*.obj
+*.lst
