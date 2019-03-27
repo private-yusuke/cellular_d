@@ -29,9 +29,14 @@ class Cellular {
 
 	bool renderNext() {
 		if(doneHeight == this.height - 1) return false;
-		foreach(i; 1..this.width-1) {
-			if(isNext(this.cellular[doneHeight][i-1..i+2])) this.cellular[doneHeight+1][i] = true;
+		
+		foreach(i; 0..this.width) {
+			bool f1 = this.cellular[doneHeight][(i-1+width)%width];
+			bool f2 = this.cellular[doneHeight][i];
+			bool f3 = this.cellular[doneHeight][(i+1)%width];
+			if(isNext([f1, f2, f3])) this.cellular[doneHeight+1][i] = true;
 		}
+
 		doneHeight++;
 		return true;
 	}
