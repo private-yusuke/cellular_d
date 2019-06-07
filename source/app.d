@@ -49,6 +49,7 @@ int main(string[] args) {
 
 	void fq(SDL_Event e) {
 		if(e.key.keysym.sym == SDLK_q) app.running = false;
+		if(e.key.keysym.sym == SDLK_s) app.palette.exportCanvas("test.bmp");
 	}
 
 	app.onUpdate = &update;

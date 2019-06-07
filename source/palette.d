@@ -34,14 +34,16 @@ public class App {
 	int SPF = 1000 / 60;
 	int frame = 0;
 	Uint32 currentTick;
-	
-	
+
+
 	this(int width = 300, int height = 300) {
 		DerelictSDL2.load();
 		DerelictSDL2ttf.load();
 		SDL_Init(SDL_INIT_VIDEO);
 		SDL_CreateWindowAndRenderer(width, height, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED, &window, &renderer);
 		this.palette = new Palette(this);
+		this.width = width;
+		this.height = height;
 		TTF_Init();
 	}
 	void addEvent(Event e, string name) {
@@ -77,7 +79,7 @@ public class App {
 		this.FPS = FPS;
 		this.SPF = 1000 / FPS;
 	}
-	
+
 	int exec() {
 		while(running) {
 			currentTick = SDL_GetTicks();
@@ -179,5 +181,16 @@ public class Palette {
 		SDL_Surface* surface = TTF_RenderUTF8_Blended(font, str.toUTFz!(char *), currentColor);
 		SDL_Texture* texture = SDL_CreateTextureFromSurface(app.renderer, surface);
 		return drawTexture(texture, x, y);
+	}
+	void exportCanvas(string filename) {
+		SDL_Surface* pScreenShot = SDL_CreateRGBSurface(0, app.width, app.height, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+		writeln(app.width, app.height);
+
+		if(pScreenShot) {
+			SDL_RenderReadPixels(app.renderer, null, SDL_GetWindowPixelFormat(app.window), pScreenShot.pixels, pScreenShot.pitch);
+
+			SDL_SaveBMP(pScreenShot, filename.toUTFz!(char *));
+			SDL_FreeSurface(pScreenShot);
+		}
 	}
 }
